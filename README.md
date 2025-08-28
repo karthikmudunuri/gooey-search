@@ -1,29 +1,58 @@
-# Gooey Search Interaction
+# Gooey Search Component for Eldora UI
 
-_This demo presents a ready-to-use search bar built with Framer Motion, featuring a gooey effect for an exceptionally smooth experience. The interactive design offers a fluid and modern search functionality that can seamlessly integrate into your web projects._
+A beautifully designed gooey search component built with React, TypeScript, Framer Motion, and Tailwind CSS. Features smooth animations and a fluid gooey effect for an exceptional user experience.
 
-![Gooey Search preview](https://github.com/oguzhantufenk/gooey-search/blob/main/gooey-search.gif)
+## Features
 
-[Article on Codrops](https://tympanus.net/codrops/2024/11/18/how-to-create-a-gooey-search-interaction-with-framer-motion-and-react/)
+- 🎨 Smooth gooey animations using SVG filters
+- 🔍 Real-time search with debouncing
+- 📱 Responsive design with mobile optimizations
+- ♿ Accessible with proper ARIA labels
+- 🎯 TypeScript support with full type safety
+- 🎭 Framer Motion animations
+- 🎨 Tailwind CSS styling
+- 🌐 Browser compatibility detection
 
-[Demo](https://tympanus.net/Tutorials/GooeySearch/)
+## Usage
 
-## Installation
+```tsx
+import GooeySearch from "./components/gooey-search";
 
-Run this demo on a [local server](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Tools_and_setup/set_up_a_local_testing_server).
+const searchData = ["React", "Vue", "Angular", "Svelte"];
+
+export default function MyComponent() {
+  const handleSearch = (query: string) => {
+    console.log("Searching:", query);
+  };
+
+  const handleSelect = (item: string) => {
+    console.log("Selected:", item);
+  };
+
+  return (
+    <GooeySearch
+      data={searchData}
+      placeholder="Search frameworks..."
+      onSearch={handleSearch}
+      onSelect={handleSelect}
+    />
+  );
+}
+```
+
+## Props
+
+- `data`: Array of strings to search through
+- `placeholder`: Input placeholder text
+- `onSearch`: Callback fired when search query changes
+- `onSelect`: Callback fired when a result is selected
+- `className`: Additional CSS classes
+- `disabled`: Disable the search functionality
+- `searchDelay`: Debounce delay in milliseconds (default: 500)
 
 ## Credits
 
-- Lucas Bebber for the [gooey effect](https://css-tricks.com/gooey-effect/)
+- Original concept by [Oguzhan Tufenk](https://github.com/oguzhantufenk)
+- Gooey effect by [Lucas Bebber](https://css-tricks.com/gooey-effect/)
+- Adapted for Eldora UI component library
 
-## Misc
-
-Follow _Author_: [Twitter](https://x.com/otfnk), [Instagram](https://www.instagram.com/otfnk/), [GitHub](https://github.com/oguzhantufenk)
-
-Follow Codrops: [Bluesky](https://bsky.app/profile/codrops.bsky.social), [Facebook](http://www.facebook.com/codrops), [GitHub](https://github.com/codrops), [Instagram](https://www.instagram.com/codropsss/), [X](http://www.x.com/codrops)
-
-## License
-
-[MIT](LICENSE)
-
-Made with :blue_heart: by [Oguzhan](http://www.codrops.com)
