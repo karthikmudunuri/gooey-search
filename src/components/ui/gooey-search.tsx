@@ -143,7 +143,7 @@ const SearchIcon = ({ isUnsupported }: { isUnsupported: boolean }) => (
     viewBox="0 0 15 15"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="text-gray-300"
+    className="text-white"
   >
     <path
       d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
@@ -156,7 +156,7 @@ const SearchIcon = ({ isUnsupported }: { isUnsupported: boolean }) => (
 
 const LoadingIcon = () => (
   <svg
-    className="w-5 h-5 animate-spin text-gray-300"
+    className="w-5 h-5 animate-spin text-white"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 256"
     aria-label="Loading"
@@ -184,7 +184,7 @@ const LoadingIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
-      opacity="0.75"
+      opacity="0.8"
     />
     <line
       x1="224"
@@ -196,7 +196,7 @@ const LoadingIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
-      opacity="0.5"
+      opacity="0.6"
     />
     <line
       x1="195.88"
@@ -208,7 +208,7 @@ const LoadingIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="16"
-      opacity="0.25"
+      opacity="0.4"
     />
   </svg>
 );
@@ -222,7 +222,7 @@ const InfoIcon = ({ index }: { index: number }) => (
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20.2832 19.9316"
-    className="w-[18px] h-[18px] relative top-0.5 text-gray-400"
+    className="w-[16px] h-[16px] relative top-0.5 text-blue-400 flex-shrink-0"
     aria-hidden="true"
     fill="none"
   >
@@ -396,19 +396,22 @@ export default function GooeySearch({
                     exit="exit"
                     transition={getResultItemTransition(index)}
                     className={cn(
-                      "absolute left-[-30px] w-full cursor-pointer rounded-full bg-black px-5 py-3 text-sm text-gray-300",
-                      isUnsupported && "px-2.5 py-[7.5px]"
+                      "absolute left-[-30px] w-full cursor-pointer rounded-full px-5 py-3 text-sm",
+                      "bg-gradient-to-r from-gray-900 to-black text-gray-200 border border-gray-800/50",
+                      "hover:from-gray-800 hover:to-gray-900 hover:text-white hover:border-gray-700",
+                      "shadow-lg backdrop-blur-sm transition-all duration-200",
+                      isUnsupported && "px-3 py-2.5"
                     )}
                     role="option"
                     onClick={() => handleItemSelect(item)}
                   >
-                    <div className="flex items-center gap-0.5">
+                    <div className="flex items-center gap-2">
                       <InfoIcon index={index} />
                       <motion.span
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: index * 0.12 + 0.3 }}
-                        className="relative -top-[0.35px]"
+                        className="relative -top-[0.35px] font-medium"
                       >
                         {item}
                       </motion.span>
@@ -423,26 +426,29 @@ export default function GooeySearch({
             variants={buttonVariants}
             onClick={handleButtonClick}
             whileHover={{ 
-              scale: state.step === 2 ? 1 : 1.05 
+              scale: state.step === 2 ? 1 : 1.02,
+              boxShadow: state.step === 1 ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" : undefined
             }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
             className={cn(
-              "rounded-full bg-black px-5 py-2.5 text-gray-300/70 transition-colors",
+              "relative rounded-full bg-gradient-to-r from-gray-900 to-black px-6 py-3 text-gray-300 shadow-lg transition-all duration-300",
+              "border border-gray-800/50 backdrop-blur-sm",
+              "hover:from-gray-800 hover:to-gray-900 hover:text-white hover:border-gray-700",
               disabled && "cursor-not-allowed opacity-50",
-              !disabled && "cursor-pointer hover:text-gray-200"
+              !disabled && "cursor-pointer"
             )}
             role="button"
             aria-disabled={disabled}
           >
             {state.step === 1 ? (
-              <span className="pointer-events-none relative left-1 text-center tracking-tight">
+              <span className="pointer-events-none relative left-1 text-center tracking-tight font-medium">
                 Search
               </span>
             ) : (
               <input
                 ref={inputRef}
                 type="text"
-                className="w-full bg-transparent text-gray-200 placeholder-gray-400 outline-none"
+                className="w-full bg-transparent text-white placeholder-gray-400 outline-none font-medium"
                 placeholder={placeholder}
                 aria-label="Search input"
                 onChange={handleSearch}
@@ -456,8 +462,10 @@ export default function GooeySearch({
               <motion.div
                 key="icon"
                 className={cn(
-                  "absolute -right-[5px] -top-[1px] flex h-[46px] w-[46px] items-center justify-center rounded-full bg-black",
-                  "md:scale-110 md:top-[2px]"
+                  "absolute -right-[6px] -top-[2px] flex h-[50px] w-[50px] items-center justify-center rounded-full",
+                  "bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg border border-blue-500/30",
+                  "hover:from-blue-500 hover:to-purple-500 transition-all duration-300",
+                  "md:scale-110 md:top-[1px]"
                 )}
                 initial="hidden"
                 animate="visible"
